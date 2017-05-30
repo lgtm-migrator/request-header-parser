@@ -1,5 +1,9 @@
 var getIP = (req) => {
-  return req.ip;
+  var ip = req.headers['x-forwarded-for'] ||
+           req.connection.remoteAddress ||
+           req.socket.remoteAddress ||
+           req.connection.socket.remoteAddress;
+  return ip;
 }
 
 var getLanguage = (req) => {
